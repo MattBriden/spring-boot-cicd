@@ -8,13 +8,10 @@ phases:
     on-failure: ABORT
     commands:
       - mvn clean install
-  pre_build:
-    on-failure: ABORT
-    commands:
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891709250373.dkr.ecr.us-east-1.amazonaws.com
   build:
     on-failure: ABORT
     commands:
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891709250373.dkr.ecr.us-east-1.amazonaws.com
       - docker build -t springboot-cicd-api:latest .
       - docker tag springboot-cicd-api:latest 891709250373.dkr.ecr.us-east-1.amazonaws.com/springboot-cicd-api:latest
   post_build:
