@@ -1,0 +1,44 @@
+# spring-boot-cicd Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-service
+  namespace: default
+spec:
+  selector:
+    app: springboot-cicd-api
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+
+# fast-candidate-api Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-cicd-api
+  namespace: default
+  labels:
+    app: springboot-cicd-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-cicd-api
+  template:
+    metadata:
+      labels:
+        app: springboot-cicd-api
+    spec:
+      containers:
+        - name: springboot-cicd-api
+          image: 891709250373.dkr.ecr.us-east-1.amazonaws.com/springboot-cicd-api:latest
+          ports:
+            - containerPort: 8080
+              hostPort: 8080
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "250m"

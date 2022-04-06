@@ -29,12 +29,17 @@ pipeline {
         }
         stage('Upload Image') {
             steps {
-                script{
+                script {
                     docker.withRegistry('https://891709250373.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
                 }
+            }
+        }
+        stage('Deploy'){
+            steps {
+                 sh 'kubectl apply -f api.yml'
             }
         }
     }
