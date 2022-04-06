@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:8u252
+FROM public.ecr.aws/docker/library/openjdk:latest
 
 # Maintainer
 MAINTAINER "Matt Briden"
