@@ -18,5 +18,10 @@ phases:
     on-failure: ABORT
     commands:
       - docker push 891709250373.dkr.ecr.us-east-1.amazonaws.com/springboot-cicd-api:latest
+      - CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::891709250373:role/test-springboot-pipeline-eks2022040611190739070000000b --role-session-name codebuild-kubectl --duration-seconds 900)
+      - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
+      - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
+      - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
+      - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
       - aws eks update-kubeconfig --name test-springboot-pipeline-eks
       - kubectl apply -f api.yaml
