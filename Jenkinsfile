@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                 sh 'kubectl apply -f api.yml'
+                 sh 'kubectl apply -f api.yaml'
             }
         }
     }
