@@ -39,7 +39,6 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                 sh 'aws eks --region us-east-1 --profile default update-kubeconfig --name test-springboot-pipeline-eks'
                  sh 'kubectl apply -f api.yml'
             }
         }
