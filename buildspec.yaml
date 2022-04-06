@@ -11,16 +11,13 @@ phases:
   pre_build:
     on-failure: ABORT
     commands:
-      - amazon-linux-extras install docker
-      - service docker start
-      - pip3 install awscli --upgrade --user
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891709250373.dkr.ecr.us-east-1.amazonaws.com
   build:
     on-failure: ABORT
     commands:
-      - docker build --no-cache -t springboot-cicd-api:latest .
+      - docker build -t springboot-cicd-api:latest .
+      - docker tag springboot-cicd-api:latest 891709250373.dkr.ecr.us-east-1.amazonaws.com/springboot-cicd-api:latest
   post_build:
     on-failure: ABORT
     commands:
-      - docker tag springboot-cicd-api:latest 891709250373.dkr.ecr.us-east-1.amazonaws.com/springboot-cicd-api:latest
       - docker push 891709250373.dkr.ecr.us-east-1.amazonaws.com/springboot-cicd-api:latest
