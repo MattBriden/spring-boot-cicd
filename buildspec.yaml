@@ -18,3 +18,5 @@ phases:
     on-failure: ABORT
     commands:
       - docker push 891709250373.dkr.ecr.us-east-1.amazonaws.com/springboot-cicd-api:latest
+      - aws eks update-kubeconfig --name test-springboot-pipeline-eks
+      - kubectl apply -f api.yaml
