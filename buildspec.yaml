@@ -11,7 +11,7 @@ phases:
   pre_build:
     on-failure: ABORT
     commands:
-      - export VERSION=$(echo ${$CODEBUILD_BUILD_NUMBER})
+      - export VERSION=$(echo ${CODEBUILD_BUILD_NUMBER})
   build:
     on-failure: ABORT
     commands:
