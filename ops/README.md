@@ -13,7 +13,7 @@ spring-boot-cicd/ops $ ENV=whirlwind AWS_PROFILE=whirlwind AWS_REGION=us-east-1 
 ### Environment Variables
 Below are the default values for all environment variables referenced in the Terraform script.
 
-- ENV: whirlwind
+- ENV: test
 - AWS_PROFILE: default
 - AWS_REGION: us-east-1
 

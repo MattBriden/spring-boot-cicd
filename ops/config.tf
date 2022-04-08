@@ -15,19 +15,24 @@ variable "region" {
 
 variable "github_token_secret_arn" {
   description = "ARN for GitHub token secret"
-  default = "arn:aws:secretsmanager:us-east-1:891709250373:secret:github/access/token-KbzuHr"
+  default = {
+    mbriden = "arn:aws:secretsmanager:us-east-1:891709250373:secret:github/access/token-KbzuHr"
+    whirlwind = ""
+  }
 }
 
 variable "eks_cluster" {
   description = "EKS Cluster destination for application"
   default = {
-    whirlwind = "test-springboot-pipeline-eks"
+    mbriden = "test-springboot-pipeline-eks"
+    whirlwind = ""
   }
 }
 
 variable "github_repo" {
   description = "GitHub repository to connect to CodeBuild"
   default = {
-    whirlwind = "https://github.com/MattBriden/spring-boot-cicd"
+    mbriden = "https://github.com/MattBriden/spring-boot-cicd"
+    whirlwind = ""
   }
 }
