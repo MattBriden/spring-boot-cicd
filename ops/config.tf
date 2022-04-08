@@ -15,7 +15,7 @@ variable "region" {
 
 variable "github_token_secret_arn" {
   description = "ARN for GitHub token secret"
-  default = "arn:aws:secretsmanager:us-east-1:548552381229:secret:github/access/token-9ldtXh"
+  default = "arn:aws:secretsmanager:us-east-1:891709250373:secret:github/access/token-KbzuHr"
 }
 
 variable "eks_cluster" {

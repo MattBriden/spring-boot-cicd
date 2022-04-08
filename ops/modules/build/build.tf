@@ -9,7 +9,7 @@ data "aws_secretsmanager_secret_version" "github_token_version" {
 resource "aws_codebuild_source_credential" "whirlwind_creds" {
   auth_type   = "PERSONAL_ACCESS_TOKEN"
   server_type = "GITHUB"
-  token = jsondecode(data.aws_secretsmanager_secret_version.github_token_version.secret_string)["token"]
+  token = jsondecode(data.aws_secretsmanager_secret_version.github_token_version.secret_string)["github_token"]
 }
 
 resource "aws_codebuild_project" "springboot_code_build" {
@@ -24,19 +24,19 @@ resource "aws_codebuild_project" "springboot_code_build" {
 
   environment {
     compute_type = "BUILD_GENERAL1_SMALL"
-    image = "aws/codebuild/standard:3.0"
+    image = "aws/codebuild/standard:4.0"
     type  = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
-  }
 
-  environment_variable {
-    name  = "ECR_REPO"
-    value = var.ecr_repo
-  }
+    environment_variable {
+      name  = "ECR_REPO"
+      value = var.ecr_repo
+    }
 
-  environment_variable {
-    name  = "EKS_CLUSTER"
-    value = var.eks_cluster
+    environment_variable {
+      name  = "EKS_CLUSTER"
+      value = var.eks_cluster
+    }
   }
 
   logs_config {

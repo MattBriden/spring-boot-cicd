@@ -7,10 +7,11 @@ then
   tf_module="-target=module.${tf_module}"
 fi
 
-ENV="${ENV:-staging}"
+ENV="${ENV:-whirlwind}"
 AWS_REGION="${AWS_REGION:-us-east-1}"
 AWS_PROFILE="${AWS_PROFILE:-default}"
-BUCKET="whirlwind-terraform-state-${ENV}"
+#BUCKET="whirlwind-terraform-state-${ENV}"
+BUCKET="terraform-bucket-mbriden"
 
 terraform=terraform
 tf_key=${ENV}-cicd-pipeline-terraform.tfstate
