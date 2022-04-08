@@ -34,8 +34,8 @@ spec:
     spec:
       containers:
         - name: springboot-cicd-api
-          image: 891709250373.dkr.ecr.us-east-1.amazonaws.com/springboot-api:latest
-#          image: $ECR_REPO/springboot-cicd-api:$VERSION
+#          image: 891709250373.dkr.ecr.us-east-1.amazonaws.com/springboot-api:latest
+          image: $ECR_REPO/springboot-cicd-api:$VERSION
           ports:
             - containerPort: 8080
               hostPort: 8080

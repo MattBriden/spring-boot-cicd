@@ -25,5 +25,5 @@ phases:
       - docker push $ECR_REPO:$VERSION
       - docker push $ECR_REPO:latest
       - aws eks update-kubeconfig --name $EKS_CLUSTER
-      - kubectl apply -f api.yaml
-#      - envsubst < api.yaml | kubectl apply -f -
+#      - kubectl apply -f api.yaml
+      - envsubst < api.yaml | kubectl apply -f -
