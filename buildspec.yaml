@@ -13,13 +13,13 @@ phases:
     on-failure: ABORT
     commands:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REPO
-      - docker build -t springboot-cicd-api:$VERSION .
-      - docker tag springboot-cicd-api:$VERSION $ECR_REPO/springboot-cicd-api:$VERSION
-      - docker tag springboot-cicd-api:$VERSION $ECR_REPO/springboot-cicd-api:latest
+      - docker build -t springboot-cicd-api:$CODEBUILD_BUILD_NUMBER .
+      - docker tag springboot-cicd-api:$CODEBUILD_BUILD_NUMBER $ECR_REPO/springboot-cicd-api:$CODEBUILD_BUILD_NUMBER
+      - docker tag springboot-cicd-api:$CODEBUILD_BUILD_NUMBER $ECR_REPO/springboot-cicd-api:latest
   post_build:
     on-failure: ABORT
     commands:
-      - docker push $ECR_REPO/springboot-cicd-api:$VERSION
+      - docker push $ECR_REPO/springboot-cicd-api:$CODEBUILD_BUILD_NUMBER
       - docker push $ECR_REPO/springboot-cicd-api:latest
 #      - CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::891709250373:role/test-springboot-pipeline-eks2022040611190739070000000b --role-session-name codebuild-kubectl --duration-seconds 900)
 #      - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
