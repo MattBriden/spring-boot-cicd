@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
         - name: springboot-cicd-api
-          image: $ECR_REPO/springboot-cicd-api:$VERSION
+          image: $ECR_REPO:$VERSION
           ports:
             - containerPort: 8080
               hostPort: 8080
